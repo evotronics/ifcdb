@@ -1,5 +1,5 @@
 application: ifcdb-hrd
-version: coming-soon
+version: offline
 runtime: python27
 api_version: 1
 threadsafe: true
@@ -9,6 +9,5 @@ handlers:
   static_dir: styles
 - url: /scripts
   static_dir: scripts
-- url: /
-  static_files: index.html
-  upload: index.html
+- url: /.*
+  script: main.app
