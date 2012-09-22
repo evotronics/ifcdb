@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Tag{% endblock %}
+{% block content %}
+<div class="tag">
+  <span>key: {{ tag.key }}</span><br/>
+  <span>version: {{ tag.meta.version }}</span><br/>
+  <span>created: {{ tag.meta.created }}</span><br/>
+  <span>modified: {{ tag.meta.modified }}</span><br/>
+  <span>slug: {{ tag.slug }}</span><br/>
+  <span>label: {{ tag.label }}</span><br/>
+</div>
+{% if fortunes %}
+<div class="fortunes">
+{% for f in fortunes %}
+  <div class="fortune">
+    <span>key: {{ f.key }}</span><br/>
+  </div>
+  <hr/>
+{% endfor %}
+</div>
+{% else %}
+No fortunes found for this tag.
+{% endif %}
+{% endblock %}

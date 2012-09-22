@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block title %}Fortune{% endblock %}
+{% block script %}
+var setup_tabs = function($tabs) {
+  console.log($tabs);
+  var $tab_panels = $('div', $tabs);
+  console.log($tab_panels);
+  $tab_panels.hide().filter(':first').show();
+  $('ul.tabs-nav a', $tabs).click(function() {
+    $tab_panels.hide().filter(this.hash).show();
+    $('ul.tabs-nav a', $tabs).removeClass('selected');
+    $(this).addClass('selected');
+    return false;
+  }).filter(':first').click();
+};
+$(document).ready(function() {
+  $('div.tabs').each(function(i, e) {
+    setup_tabs($(e));
+  });
+});
+{% endblock %}
+{% block content %}
+        <span>Fortune Cookie:</span><br/>
+        <table class="table">
+        <tr><td>id</td><td>{{ fc.key.id() }}</td><tr/>
+        <tr><td>key</td><td>{{ fc.key }}</td><tr/>
+        <tr><td>when</td><td>{{ fc.when }}</td><tr/>
+        <tr><td>owner</td><td>{{ fc.owner }}</td><tr/>
+        <tr><td>lang</td><td>{{ fc.lang }}</td><tr/>
+        <tr><td>created</td><td>{{ fc.created }}</td><tr/>
+        <tr><td>updated</td><td>{{ fc.meta.updated }}</td><tr/>
+        <tr><td>enabled</td><td>{{ fc.enabled }}</td><tr/>
+        <tr><td>tags</td><td>{{ fc.tags }}</td><tr/>
+        <tr><td>le k</td><td>{{ fc.meta.log_entry }}</td><tr/>
+        <tr><td>le id</td><td>{{ le.key.id() }}</td><tr/>
+        </table>
+        <span>Log:</span><br/>
+        <table class="table">
+        {% for le in les %}
+        <tr>
+          <td>{{ le.date }}</td>
+          <td>{{ le.key.id() }}</td>
+          <td>{{ le.content }}</td>
+        <tr/>
+        {% endfor %}
+        </table>
+{#
+  <div>
+    <blockquote>{{ f.message.content }}</blockquote>
+    <hr/>
+    <div>
+      Submitted by [account id] on [date]<br/>
+      <strong>Categories</strong>:
+        {% for cat in f.categories|groupby("label") %}
+          <a href="...">{{ cat.label }}</a>{% if not loop.last %},{% endif %}
+        {% endfor %}<br/>
+    </div>
+    <hr/>
+    <div class="tabs">
+      <ul class="tabs-nav">
+        <li><a href="#share">Share</a></li>
+        <li><a href="#tag">Tag</a></li>
+        <li><a href="#rate">Rate</a></li>
+        <li><a href="#favorite">Favorite</a></li>
+        <li><a href="#lists">Lists</a></li>
+      </ul>
+      <div id="share" class="tab-panel">
+        [email] [IM] [Facebook] [Digg] [Delicious] [...]
+      </div>
+      <div id="tag" class="tab-panel">
+        Tags details...
+      </div>
+      <div id="rate" class="tab-panel">
+        Rating details<br/>
+        general: ...<br/>
+        xyz: ...<br/>
+        abc: ...<br/>
+      </div>
+      <div id="favorite" class="tab-panel">
+        Favorite details
+      </div>
+      <div id="lists" class="tab-panel">
+        List details
+      </div>
+    </div>
+    <hr class="blank"/>
+    <div class="tabs">
+      <ul class="tabs-nav">
+        <li><a href="#comments">Comments</a></li>
+        <li><a href="#details">Details</a></li>
+        <li><a href="#history">History</a></li>
+      </ul>
+      <div id="comments" class="tab-panel">
+        Comments
+      </div>
+      <div id="details" class="tab-panel">
+        <span>Fortune Cookie:</span><br/>
+        <table>
+        <tr><td>id</td><td>{{ f.id }}</td><tr/>
+        <tr><td>key</td><td>{{ f.key }}</td><tr/>
+        <tr><td>key_name</td><td>{{ f.key().name() }}</td><tr/>
+        <tr><td>key_name</td><td>{{ f.key().name()[3:] }}</td><tr/>
+        <tr><td>when</td><td>{{ f.when }}</td><tr/>
+        <tr><td>owner</td><td>{{ f.owner }}</td><tr/>
+        <tr><td>lang</td><td>{{ f.lang }}</td><tr/>
+        <tr><td>created</td><td>{{ f.created }}</td><tr/>
+        <tr><td>modified</td><td>{{ f.modified }}</td><tr/>
+        <tr><td>enabled</td><td>{{ f.enabled }}</td><tr/>
+        <tr><td>categories</td><td>{{ f.categories }}</td><tr/>
+        </table>
+        <hr/>
+        <span>Message:</span><br/>
+        <table>
+        <tr><td>from</td><td>{{ f.message.from }}</td><tr/>
+        <tr><td>to</td><td>{{ f.message.to }}</td><tr/>
+        <tr><td>in-reply-to</td><td>{{ f.message.in_reply_to }}</td><tr/>
+        <tr><td>subject</td><td>{{ f.message.subject }}</td><tr/>
+        <tr><td>date</td><td>{{ f.message.date }}</td><tr/>
+        <tr><td>created</td><td>{{ f.message.created }}</td><tr/>
+        <tr><td>modified</td><td>{{ f.message.modified }}</td><tr/>
+        <tr><td>content_type</td><td>{{ f.message.content_type }}</td><tr/>
+        <tr><td>content</td><td>{{ f.message.content }}</td><tr/>
+        </table>
+      </div>
+      <div id="history" class="tab-panel">
+        <h4><a href="#statistics">Statistics</a></h4>
+        <div id="statistics">
+        </div>
+        <h4><a href="#log">Log</a></h4>
+        <div id="log">
+        </div>
+      </div>
+    </div>
+  </div>
+#}
+{% endblock %}

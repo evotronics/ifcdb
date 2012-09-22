@@ -1,0 +1,12 @@
+mapreduce:
+- name: dummy
+  mapper:
+    input_reader: mapreduce.input_readers.DatastoreKeyReader
+    handler: main.test
+#- name: Import a fortune file
+#  mapper:
+#    input_reader: mapreduce.input_readers.BlobstoreLineInputReader
+#    handler: main.mr_import_fortune_file
+#    #params:
+#    #- name: entity_kind
+#    #  default: <your entity name, e.g. main.MyEntity>

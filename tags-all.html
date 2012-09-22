@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Tags{% endblock %}
+{% block content %}
+{% if tags %}
+<div class="tags">
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Slug</th>
+        <th>Label</th>
+        <th>Version</th>
+        <th>Created</th>
+        <th>Modified</th>
+    </thead>
+    <tbody>
+      {% for t in tags %}
+      <tr>
+        <td><a href="/tags/{{ t.key.id() }}">{{ t.slug }}</a></td>
+        <td>{{ t.label }}</td>
+        <td>{{ t.meta.version }}</td>
+        <td>{{ t.meta.created }}</td>
+        <td>{{ t.meta.modified }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+No tags.
+{% endif %}
+<a class="btn btn-success" href="/tags/-/add"><i class="icon-plus icon-white"></i> Add Tag</a>
+{% endblock %}

@@ -1,0 +1,25 @@
+body {
+  padding-top: 40px;
+}
+.sidebar {
+  margin: .5em;
+  padding: .5em;
+}
+.top-header {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.footer {
+  text-align: center;
+}
+.header {
+  padding-bottom: .5em;
+  margin-bottom: .5em;
+  border-bottom: thin solid #eee;
+}
+.ads-120 {
+  width: 120px;
+}
+.ads-160 {
+  width: 160px;
+}

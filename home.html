@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div>
+<p>Welcome to the Internet Fortune Cookie Database!</p>
+</div>
+<div>
+<p>Fortune cookie count: <strong>{{ fc_count|d("lots!") }}</strong></p>
+</div>
+<div>
+{% for f in fortunes %}
+  <hr/>
+  <div>
+    <span>link: <a href="/fc/{{ f.key.id() }}">FC</a></span><br/>
+    <span>key: {{ f.key }}</span><br/>
+    <span>@type: {{ f.entry['@type'] }}</span><br/>
+    <span>content @type: {{ f.entry.content['@type'] }}</span><br/>
+    <span>content type: {{ f.entry.content.type }}</span><br/>
+    <span>content body: {{ f.entry.content.body|e }}</span><br/>
+    {#
+    <span>hash: {{ f.hash }}</span><br/>
+    <span>created: {{ f.created }}</span><br/>
+    <span>modified: {{ f.modified }}</span><br/>
+    <span>enabled: {{ f.enabled }}</span><br/>
+    <span>tags: {{ f.tags }}</span><br/>
+    #}
+{#
+    <span>id: {{ f.id }}</span><br/>
+    <span>key: {{ f.key }}</span><br/>
+    <span>key_name: {{ f.key().name() }}</span><br/>
+    <span>key_name: {{ f.key().name()[3:] }}</span><br/>
+    <span>when: {{ f.when }}</span><br/>
+    <span>owner: {{ f.owner }}</span><br/>
+    <span>content: {{ f.content }}</span><br/>
+    <span>content_type: {{ f.content_type }}</span><br/>
+    <span>lang: {{ f.lang }}</span><br/>
+    <span>created: {{ f.created }}</span><br/>
+    <span>modified: {{ f.modified }}</span><br/>
+    <span>enabled: {{ f.enabled }}</span><br/>
+    <span>categories: {{ f.categories }}</span><br/>
+#}
+    <br/>
+    <blockquote><p>{{ f.content }}</p></blockquote>
+    {#<blockquote>{{ f.message|e|replace("\n","<br/>") }}</blockquote>#}
+    <blockquote>{{ f.content|safe|replace("\n","XX<br/>")|safe }}</blockquote>
+    <div>
+      <small>
+{#
+        <a href="/fc/{{ f.key().name()[3:] }}">Details</a> |
+        <a href="/fc/{{ f.key().name()[3:] }}#comments">Comments ({{ f.comment_count|d(0) }})</a> |
+        <a href="/fc/{{ f.key().name()[3:] }}#similar">Similar</a>
+#}
+      </small>
+    </div>
+  </div>
+{% endfor %}
+  <hr/>
+  {% if start %}
+  <div>
+     <p><a href="/?s={{ start }}">Next...</a></p>
+  </div>
+  {% endif %}
+  <hr/>
+  <div>
+     <p><a href="/fc">More...</a></p>
+  </div>
+</div>
+{% endblock %}

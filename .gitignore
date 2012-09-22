@@ -1,5 +1,6 @@
 *.py[co]
 *~
+*.swp
 
 # Packages
 *.egg
@@ -21,8 +22,12 @@ pip-log.txt
 .coverage
 .tox
 
-#Translations
+# Translations
 *.mo
 
-#Mr Developer
+# Mr Developer
 .mr.developer.cfg
+
+# Google App Engine dev files
+blob.db
+data.db

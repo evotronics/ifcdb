@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Upload Fortune Cookies{% endblock %}
+{% block script %}
+$(document).ready(function() {
+    $('#preview').click(function() {
+        $('#fc').ajaxSubmit({
+            url: '/fc/-/create'
+        });
+        return false;
+    });
+    $('#create').click(function() {
+        $('#fc').ajaxSubmit({
+            url: '/fc'
+        });
+        return false;
+    });
+});
+{% endblock %}
+{% block content %}
+<h2>Upload Fortune Cookies</h2>
+<div>
+  <p>Please enter information for a new fortune cookie!</p>
+  <form action="{{ upload_url }}" method="POST" enctype="multipart/form-data">
+     Upload File: <input type="file" name="file"><br/>
+     <input type="submit" name="submit" value="Submit">
+  </form>
+  {#
+  <form id="fc" action="#" method="post">
+    <fieldset>
+      <legend>Basic Information</legend>
+      <div><textarea name="content" rows="5" width="80">{{ content }}</textarea></div>
+      <div>lang</div>
+      <div>Add category+rating</div>
+    </fieldset>
+    <fieldset>
+      <legend>Extra Information</legend>
+      <div>...</div>
+    </fieldset>
+    <div>
+      <input id="preview" type="submit" value="Preview">
+      <input id="create" type="submit" value="Create">
+    </div>
+  </form>
+  #}
+</div>
+{% endblock %}
